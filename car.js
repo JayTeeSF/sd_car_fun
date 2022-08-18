@@ -38,6 +38,22 @@ class Car{
       this.speed+=this.friction;
     }
 
+    if (Math.abs(this.speed)<this.friction){
+      /* 
+       * set speed to 0 if we're at 1/2 friction
+       *  Otherwise the car may keep moving (slightly)
+       */
+     this.speed = 0;
+    }
+
+    if(this.controls.left) {
+      this.x-=2;
+    }
+
+    if(this.controls.right) {
+      this.x+=2;
+    }
+
     this.y -= this.speed;
   }
   draw(ctx){
