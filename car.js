@@ -49,16 +49,25 @@ class Car{
 
     // angle works based on a unit circle
     // that's rotated 90degrees counter-clockwise
-    if(this.controls.left) {
-      this.angle += 0.03;
+    if(this.speed!=0) {
+      const flip=this.speed>0?1:-1; // driving in reverse works
+
+      if(this.controls.left) {
+        this.angle += 0.03*flip;
+      }
+  
+      if(this.controls.right) {
+        this.angle -= 0.03*flip;
+      }
     }
 
-    if(this.controls.right) {
-      this.angle -= 0.03;
-    }
+    /*
+     * magic for moving car in direction it is facing
+     * ...unless you completely turn the car upside down ...then it is confused...
+     */
+    this.x -= Math.sin(this.angle)*this.speed;
+    this.y -= Math.cos(this.angle)*this.speed;
 
-    //this.x -= this.angle;
-    this.y -= this.speed;
   }
   draw(ctx){
     ctx.save();
