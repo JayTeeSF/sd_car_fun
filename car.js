@@ -131,8 +131,6 @@ class Car{
         ctx.lineTo(this.polygon[i].x, this.polygon[i].y)
       }
       ctx.fill();
-      // } else {
-      // console.warn("attempting to draw from polygon before 'update' has been called");
     }
 
     this.sensor.draw(ctx);

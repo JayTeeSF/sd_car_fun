@@ -66,7 +66,6 @@ class Sensor{
 
   draw(ctx){
     if(this.rays.length == 0) {
-      // console.warn("Sensor trying to draw before updating...")
       return false;
     }
 
