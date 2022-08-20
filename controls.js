@@ -5,7 +5,9 @@ class Controls{
     this.right = false;
     this.reverse = false;
 
-    if (!rogue) {
+    if (rogue) {
+      this.forward = true;
+    } else {
       this.#addKeyboardListeners();
     }
   }

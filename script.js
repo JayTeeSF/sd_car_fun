@@ -6,8 +6,8 @@ const road = new Road(canvas.width/2, canvas.width * 0.9);
 const car = new Car(road.getLaneCenter(1),100,30,50);
 
 const traffic = [
-  // put a rogue car in our way...
-  new Car(road.getLaneCenter(1),-100,30,50,true)
+  // put a rogue car in our way ...that drives slower
+  new Car(road.getLaneCenter(1),-100,30,50,true,2)
 ]
 
 animate();
