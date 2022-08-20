@@ -1,11 +1,13 @@
 class Controls{
-  constructor(){
+  constructor(rogue=false){
     this.forward = false;
     this.left = false;
     this.right = false;
     this.reverse = false;
 
-    this.#addKeyboardListeners();
+    if (!rogue) {
+      this.#addKeyboardListeners();
+    }
   }
 
   #addKeyboardListeners(){
