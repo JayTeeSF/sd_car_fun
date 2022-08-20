@@ -1,5 +1,5 @@
 class Road{
-  constructor(x,width,laneCount=3){
+  constructor(x,width,laneCount=4){
     this.x = x;
     this.width = width;
     this.laneCount = laneCount;
@@ -23,6 +23,14 @@ class Road{
         this.right,
         i / this.laneCount //ranges from 0 to 1
       );
+
+      // use dashed-lines for middle lanes
+      if(i>0 && i<this.laneCount) {
+        // draw 20 pixels then insert a break of 20
+        ctx.setLineDash([20,20]);
+      } else {
+        ctx.setLineDash([]);
+      }
 
       ctx.beginPath();
       ctx.moveTo(x, this.top);
