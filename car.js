@@ -12,7 +12,7 @@ class Car{
     this.angle = 0;
     this.damaged = false
 
-    if(rogue) {
+    if(!rogue) {
       this.sensor = new Sensor(this);
     }
     this.controls = new Controls(rogue);
