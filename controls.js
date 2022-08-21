@@ -1,14 +1,17 @@
 class Controls{
-  constructor(rogue=false){
+  constructor(controlType){
     this.forward = false;
     this.left = false;
     this.right = false;
     this.reverse = false;
 
-    if (rogue) {
-      this.forward = true;
-    } else {
-      this.#addKeyboardListeners();
+    switch(controlType) {
+      case "ROGUE":
+        this.forward = true;
+        break;
+      case "AI":
+        this.#addKeyboardListeners();
+        break;
     }
   }
 

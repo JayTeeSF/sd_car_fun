@@ -1,10 +1,9 @@
 class Car{
-  constructor(x,y,width,height,rogue=false,maxSpeed=3){
+  constructor(x,y,width,height,controlType="AI",maxSpeed=3){
     this.x = x;
     this.y = y
     this.width = width;
     this.height = height;
-    // this.traffic = rogue;
 
     this.speed = 0;
     this.acceleration = 0.2;
@@ -12,15 +11,17 @@ class Car{
     this.friction = 0.05;
     this.angle = 0;
     this.damaged = false
+    this.useBrain = (controlType == "AI");
 
-    if(!rogue) {
+    if(controlType != "ROGUE") {
       this.sensor = new Sensor(this);
-      // 4: forward, backward, left, right
+      // 4-outputs are: forward, left, right, reverse
+      // we need to assign an already trained network!
       this.brain = new NeuralNetwork(
         [this.sensor.rayCount,6,4] 
       );
     }
-    this.controls = new Controls(rogue);
+    this.controls = new Controls(controlType);
   }
 
   update(roadBorders, traffic){
@@ -30,7 +31,7 @@ class Car{
       this.damaged = this.#assessDamage(roadBorders, traffic);
     }
 
-    if(this.sensor){
+    if (this.sensor) {
       this.sensor.update(roadBorders, traffic);
       const offsets = this.sensor.readings.map(
         s => (s == null) ? 0 : 1-s.offset
@@ -38,7 +39,13 @@ class Car{
       const outputs = NeuralNetwork.feedForward(
         offsets, this.brain
       );
-      console.log(outputs);
+      if (this.useBrain) {
+        // console.log(outputs);
+        this.controls.forward = outputs[0];
+        this.controls.left = outputs[1];
+        this.controls.right = outputs[2];
+        this.controls.reverse = outputs[3];
+      }
     }
   }
 
