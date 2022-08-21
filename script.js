@@ -46,9 +46,14 @@ function animate(time) {
     traffic[i].draw(carCtx, "red");
   }
 
+  carCtx.globalAlpha = 0.2;
   for (let i = 0; i < cars.length; i++) {
     cars[i].draw(carCtx, "blue");
   }
+  carCtx.globalAlpha = 1;
+  // redraw the first car to emphasize it
+  // and only draw its with sensors...
+  cars[0].draw(carCtx, "blue", true);
 
   carCtx.restore();
 
