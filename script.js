@@ -27,12 +27,14 @@ const traffic = [
 animate();
 
 function save() {
+  console.log("saving...");
   localStorage.setItem(
     "bestBrain",
     JSON.stringify(bestCar.brain)
   );
 }
 function destroy() {
+  console.log("destroying old best car...");
   localStorage.removeItem("bestBrain");
 }
 
