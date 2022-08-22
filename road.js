@@ -3,6 +3,7 @@ class Road{
     this.x = x;
     this.width = width;
     this.laneCount = laneCount;
+    this.laneWidth = this.width / this.laneCount;
 
     this.left = x - width/2;
     this.right = x + width/2;
@@ -58,12 +59,11 @@ class Road{
   }
 
   getLaneCenter(laneIndex){
-    const laneWidth = this.width / this.laneCount;
     // an offset (1/2 the width of a lane)
     // from the left of any particular lane
     // could also use lerp and return some percentage..
-    let shouldReturn =  this.left + laneWidth/2 +
-      Math.min(laneIndex, this.laneCount - 1) * laneWidth;
+    let shouldReturn =  this.left + this.laneWidth/2 +
+      Math.min(laneIndex, this.laneCount - 1) * this.laneWidth;
     /*
     let percentOfALane = 0.5
     let lanePercent = (laneIndex + 1) / this.laneCount // lane 1 of 4 is 25%; lane 2 of 4 is 50%, etc...
